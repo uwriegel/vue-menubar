@@ -1,6 +1,6 @@
 {
   "name": "vue-menubar",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "repository": {
@@ -8,8 +8,8 @@
     "url": "git+https://github.com/uriegel/vue-menubar.git"
   },
   "keywords": [
-      "vue",
-      "javascript"
+    "vue",
+    "javascript"
   ],
   "author": "Uwe Riegel",
   "license": "MIT",
