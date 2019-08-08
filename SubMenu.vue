@@ -101,7 +101,7 @@ export default {
         background-color: var(--vue-menu-background-color); 
         position: absolute;
         z-index: 10000;
-        top: 30px;
+        top: var(--vue-menu-submenu-top);
         border-color: var(--vue-menu-border-color);
         border-style: solid;
         border-width: 1px;

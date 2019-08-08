@@ -92,7 +92,8 @@ export default {
             if (result) {
                 const recentIndex = this.menuState.selectedIndex
                 this.$el.focus()
-                this.menuState.selectedIndex = recentIndex
+                const state = this.menuState
+                state.selectedIndex = recentIndex
             }
             return !this.menuState.isKeyboardActivated && result
         }
