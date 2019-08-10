@@ -95,7 +95,7 @@ export default {
             }
         }, true)
         this.accelerators = getAccelerators(this.items)
-        this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`)
+        setTimeout(() => this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`), 100)
     }
 }
 </script>
