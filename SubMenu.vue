@@ -1,6 +1,6 @@
 <template>
     <div class="submenu">
-        <menu-item class="submenuitem" v-for="(item, index) in items" @on-menu-item-clicked="onMenuItem"
+        <menu-item class="submenuitem" v-for="(item, index) in items" 
             :key="index" :item='item' 
             :menuState='menuState' :index='index' :subMenuState='subMenuState' />
     </div>    
@@ -51,7 +51,7 @@ export default {
                     break
                 case 13: // Enter
                 case 32: // Space
-                    this.$emit('on-menu-item-clicked', this.items[this.subMenuState.selectedIndex].action)
+                    this.items[this.subMenuState.selectedIndex].action()
                     this.$emit('on-closing')
                     evt.preventDefault()
                     evt.stopPropagation()
@@ -71,7 +71,7 @@ export default {
                         }
 
                         if (hits.length == 1) {
-                            this.$emit('on-menu-item-clicked', this.items[hits[0]].action)
+                            this.items[hits[0]].action()
                             this.$emit('on-closing')
                             evt.preventDefault()
                             evt.stopPropagation()
@@ -84,9 +84,6 @@ export default {
                     }
                     break
             }
-        },
-        onMenuItem: function (param, item) {
-            this.$emit('on-menu-item-clicked', param, item)
         }
     },
     mounted: function () {

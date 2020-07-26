@@ -1,6 +1,6 @@
 <template>
     <div class="root">
-        <main-menu :items="menuItems" @on-menu-item-clicked="onMenuItem" />
+        <main-menu :items="menuItems" @="onMenuItem" />
         <h1>Ein Test</h1>
     </div>
 </template>
@@ -11,6 +11,10 @@ export default {
     components: {
         MainMenu
     },
+    methods: {
+        rename() { console.log("Rename", this)},
+        extendedRename() { console.log("Extended Rename", this)}
+    },
     data() {
         return {
             menuItems: [
@@ -18,14 +22,14 @@ export default {
                     name: "_Datei",
                     subItems: [{ 
                             name: "_Umbenennen",
-                            action: "rename",
+                            action: () => this.rename(),
                             accelerator: { 
                                 name: "F2",
                                 key: 113
                             }
                         }, { 
                             name: "Er_weitertes Umbenennen",
-                            action: "extendedRename",
+                            action: () => this.extendedRename(),
                             accelerator: { 
                                 name: "Strg+F2",
                                 ctrl: true,
@@ -35,14 +39,14 @@ export default {
                             name: "-"
                         }, { 
                             name: "_Kopieren",
-                            action: "copy",
+                            action: () => console.log("Copy"),
                             accelerator: { 
                                 name: "F5",
                                 key: 116
                             }
                         }, { 
                             name: "_Verschieben",
-                            action: "move",
+                            action: () => console.log("Move"),
                             accelerator: { 
                                 name: "F6",
                                 key: 117
@@ -50,7 +54,7 @@ export default {
                         }, { 
                             name: "_Löschen",
                             accelerator: { name: "Entf"},
-                            action: "delete"
+                            action: () => console.log("Delete"),
                         }, { 
                             name: "-"
                         }, { 
@@ -59,12 +63,12 @@ export default {
                                 name: "F7",
                                 key: 118
                             },
-                            action: "createFolder"
+                            action: () => console.log("CreateFolder"),
                         }, { 
                             name: "-"
                         }, { 
                             name: "_Eigenschaften",
-                            action: "properties",
+                            action: () => console.log("Properties"),
                             accelerator: { 
                                 name: "Alt+Enter",
                                 key: 13,
@@ -72,7 +76,7 @@ export default {
                             }
                         }, { 
                             name: "Öffnen _mit",
-                            action: "openAs",
+                            action: () => console.log("OpenAs"),
                             accelerator: { 
                                 name: "Strg+Enter",
                                 key: 13,
@@ -82,7 +86,7 @@ export default {
                             name: "-"
                         }, { 
                             name: "_Beenden",
-                            action: "close",
+                            action: () => console.log("Close"),
                             accelerator: { name: "Alt+F4"}
                         }
                     ]
@@ -94,7 +98,7 @@ export default {
                             accelerator: { name: "F1"}
                         }, { 
                             name: "_Gleichen Ordner öffnen",
-                            action: "openSameFolder",
+                            action: () => console.log("openSameFolder"),
                             accelerator: { 
                                 name: "F9",
                                 key: 120,
@@ -117,7 +121,7 @@ export default {
                     name: "_Ansicht",
                     subItems: [{ 
                             name: "_Versteckte Dateien",
-                            action: "showHidden",
+                            action: () => console.log("ShowHidden"),
                             checkSelected: () => this.$store.state.showHidden,
                             accelerator: { 
                                 name: "Strg+H",
@@ -126,7 +130,7 @@ export default {
                             }
                         }, { 
                             name: "_Aktualisieren",
-                            action: "refresh",
+                            action: () => console.log("Refresh"),
                             accelerator: { 
                                 name: "Strg+R",
                                 key: 82,
@@ -136,7 +140,7 @@ export default {
                             name: "-"
                         }, { 
                             name: "_Vorschau",
-                            action: "showViewer",
+                            action: () => console.log("Show Viewer"),
                             checkSelected: () => this.$store.state.showViewer,
                             accelerator: { 
                                 name: "F3",
@@ -148,7 +152,7 @@ export default {
                             name: "_Zoomlevel"
                         }, { 
                             name: "_Vollbild",
-                            action: "fullscreen",
+                            action: () => console.log("FullScreen"),
                             accelerator: { 
                                 name: "F11",
                                 key: 122
@@ -157,7 +161,7 @@ export default {
                             name: "-"
                         }, { 
                             name: "_Entwicklerwerkzeuge",
-                            action: "devtools",
+                            action: () => console.log("DevTools"),
                             accelerator: { 
                                 name: "F12",
                                 key: 123
@@ -168,12 +172,7 @@ export default {
             ],
             acceleratorMap: new Map()
         }        
-    },
-    methods: {
-        onMenuItem(a) {
-            console.log("a", a);
-        }
-    }    
+    }
 }
 </script>
 

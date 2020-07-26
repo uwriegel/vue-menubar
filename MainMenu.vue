@@ -1,7 +1,7 @@
 <template>
     <ul @keydown="onKeyDown">
         <main-menu-item v-for="(item, index) in items" 
-            @keyboard-activated-stopped="stopKeyboardActivated" @on-menu-item-clicked="onMenuItem" @on-closing="closeMenu"
+            @keyboard-activated-stopped="stopKeyboardActivated" @on-closing="closeMenu"
             :key="index" :item='item' :menuState='menuState' :index='index' :subItems='item.subItems' />
     </ul>
 </template>
@@ -50,9 +50,6 @@ export default {
                         break
                 }
             }
-        },
-        onMenuItem: function (param, item) {
-            this.$emit('on-menu-item-clicked', param, item)
         },
         closeMenu: function () {
             this.stopKeyboardActivated()
