@@ -8,6 +8,7 @@
 
 <script>
 import MainMenuItem from './MainMenuItem.vue'
+import { installAccelerators } from './accelerators'
 import { getShortcuts, parseShortcuts } from './shortcuts'
 
 export default {
@@ -95,6 +96,7 @@ export default {
             }
         }, true)
         this.shortcuts = getShortcuts(this.items)
+        installAccelerators(this.items)
         this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`)
     }
 }
