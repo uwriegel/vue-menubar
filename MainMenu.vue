@@ -1,5 +1,5 @@
 <template>
-    <ul @keydown="onKeyDown">
+    <ul @keydown="onKeyDown" :class="{'hidden': !visible}">
         <main-menu-item v-for="(item, index) in items" 
             @keyboard-activated-stopped="stopKeyboardActivated" @on-closing="closeMenu"
             :key="index" :item='item' :menuState='menuState' :index='index' :subItems='item.subItems' />
@@ -27,7 +27,8 @@ export default {
                 menubar: null,
                 accelerated: false,
                 isKeyboardActivated: false
-            }
+            },
+            visible: false    
         }
     },
     methods: {
@@ -56,11 +57,16 @@ export default {
             this.menuState.selectedIndex = -1
             if (this.menuState.lastActive)
                 this.menuState.lastActive.focus()
+            this.visible = false
         },
     },
     mounted: function () {
         this.menuState.menubar = this.$el
         document.addEventListener("keydown", evt => {
+            if (evt.keyCode == 18) {
+                this.visible = !this.visible
+                setTimeout(() => this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`))
+            }            
             if (this.menuState.isKeyboardActivated) {
                 const hits = parseShortcuts(this.shortcuts, evt.key)
                 if (hits.length > 0) {
@@ -107,6 +113,9 @@ export default {
         padding: 0;
         margin: 0;
     }
+    ul.hidden {
+        display: none; 
+    }    
     ul > li {
         height: 100%;
         display: flex;
