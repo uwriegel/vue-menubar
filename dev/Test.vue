@@ -167,6 +167,11 @@ export default {
                 }
             ],
             acceleratorMap: new Map()
+        }        
+    },
+    methods: {
+        onMenuItem(a) {
+            console.log("a", a);
         }
     }    
 }

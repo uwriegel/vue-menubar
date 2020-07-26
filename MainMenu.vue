@@ -8,7 +8,7 @@
 
 <script>
 import MainMenuItem from './MainMenuItem.vue'
-import { getAccelerators, parseAccelerators } from './accelerators'
+import { getShortcuts, parseShortcuts } from './shortcuts'
 
 export default {
     name: 'main-menu',
@@ -64,7 +64,7 @@ export default {
         this.menuState.menubar = this.$el
         document.addEventListener("keydown", evt => {
             if (this.menuState.isKeyboardActivated) {
-                const hits = parseAccelerators(this.accelerators, evt.key)
+                const hits = parseShortcuts(this.shortcuts, evt.key)
                 if (hits.length > 0) {
                     this.menuState.selectedIndex = hits[0]
                     this.menuState.isKeyboardActivated = false
@@ -94,7 +94,7 @@ export default {
                     this.menuState.selectedIndex = 0
             }
         }, true)
-        this.accelerators = getAccelerators(this.items)
+        this.shortcuts = getShortcuts(this.items)
         this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`)
     }
 }

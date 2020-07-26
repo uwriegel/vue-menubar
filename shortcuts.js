@@ -1,5 +1,5 @@
-export function getAccelerators(items) {
-    const getAccelerator = function (item, index) {
+export function getShortcuts(items) {
+    const getShortcut = function (item, index) {
         const pos = item.indexOf('_')
         if (pos == -1)
             return null
@@ -9,11 +9,11 @@ export function getAccelerators(items) {
         }
     }
     
-    return items.map((n, i) => getAccelerator(n.name, i)).filter(n => n ? true : false)
+    return items.map((n, i) => getShortcut(n.name, i)).filter(n => n ? true : false)
 }
 
-export function parseAccelerators(accelerators, key) {
-    return accelerators.filter(element => element.key == key).map(n => n.index)
+export function parseShortcuts(shortcuts, key) {
+    return shortcuts.filter(element => element.key == key).map(n => n.index)
 }
 
 export function makeKey(key, alt, shift, ctrl) {

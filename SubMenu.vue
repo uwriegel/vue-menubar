@@ -8,7 +8,7 @@
 
 <script>
 import MenuItem from './MenuItem.vue'
-import { getAccelerators, parseAccelerators } from './accelerators'
+import { getShortcuts, parseShortcuts } from './shortcuts'
 
 export default {
     name: 'sub-menu',
@@ -57,17 +57,17 @@ export default {
                     evt.stopPropagation()
                     break
                 default: {
-                        const hits = parseAccelerators(this.accelerators, evt.key)
+                        const hits = parseShortcuts(this.shortcuts, evt.key)
 
-                        if (this.acceleratorHits) {
-                            if (this.acceleratorHits.key == evt.key) {
-                                this.acceleratorHits.index++
-                                if (this.acceleratorHits.index >= this.acceleratorHits.hits.length)
-                                    this.acceleratorHits.index = 0
-                                this.subMenuState.selectedIndex = hits[this.acceleratorHits.index]
+                        if (this.shortcutHits) {
+                            if (this.shortcutHits.key == evt.key) {
+                                this.shortcutHits.index++
+                                if (this.shortcutHits.index >= this.shortcutHits.hits.length)
+                                    this.shortcutHits.index = 0
+                                this.subMenuState.selectedIndex = hits[this.shortcutHits.index]
                                 return
                             }
-                            this.acceleratorHits = null
+                            this.shortcutHits = null
                         }
 
                         if (hits.length == 1) {
@@ -78,7 +78,7 @@ export default {
                             return
                         }
                         if (hits.length > 1) {
-                            this.acceleratorHits = { key: evt.key, hits: hits, index: 0 }
+                            this.shortcutHits = { key: evt.key, hits: hits, index: 0 }
                             this.subMenuState.selectedIndex = hits[0]
                         }
                     }
@@ -90,7 +90,7 @@ export default {
         }
     },
     mounted: function () {
-        this.accelerators = getAccelerators(this.items)
+        this.shortcuts = getShortcuts(this.items)
     }
 }
 </script>
