@@ -17,7 +17,8 @@ export default {
         MainMenuItem
     },
     props: [
-        'items'
+        'items',
+        'autoMode'
     ],
     data() {
         return {
@@ -57,13 +58,14 @@ export default {
             this.menuState.selectedIndex = -1
             if (this.menuState.lastActive)
                 this.menuState.lastActive.focus()
-            this.visible = false
+            this.visible = !this.autoMode
         },
     },
     mounted: function () {
+        this.visible = !this.autoMode
         this.menuState.menubar = this.$el
         document.addEventListener("keydown", evt => {
-            if (evt.keyCode == 18) {
+            if (this.autoMode && evt.keyCode == 18) {
                 this.visible = !this.visible
                 setTimeout(() => this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`))
             }            

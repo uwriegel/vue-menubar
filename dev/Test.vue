@@ -1,6 +1,6 @@
 <template>
     <div class="root">
-        <main-menu :items="menuItems" @="onMenuItem" />
+        <main-menu :items="menuItems" :autoMode=true @="onMenuItem" />
         <h1>Ein Test</h1>
     </div>
 </template>
