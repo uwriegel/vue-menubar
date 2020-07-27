@@ -17,6 +17,7 @@ export default {
     },
     data() {
         return {
+            showHidden: false,
             menuItems: [
                 {
                     name: "_Datei",
@@ -121,8 +122,8 @@ export default {
                     name: "_Ansicht",
                     subItems: [{ 
                             name: "_Versteckte Dateien",
-                            action: () => console.log("ShowHidden"),
-                            //checkSelected: () => this.$store.state.showHidden,
+                            action: () => this.showHidden = !this.showHidden,
+                            checkSelected: () => this.showHidden,
                             accelerator: { 
                                 name: "Strg+H",
                                 key: 72,
@@ -157,7 +158,8 @@ export default {
                                 name: "-"
                         }   , { 
                                 name: "_Blau",
-                                checkSelected: () => this.$store.state.showViewer
+                                action: () => this.showHidden = !this.showHidden,
+                                checkSelected: () => this.showHidden,
                             }, {
                                 name: "_Rot",
                                 checkSelected: () => this.$store.state.showViewer,
