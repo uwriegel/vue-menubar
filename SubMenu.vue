@@ -1,6 +1,6 @@
 <template>
     <div class="submenu">
-        <menu-item class="submenuitem" v-for="(item, index) in items" 
+        <menu-item class="submenuitem" v-for="(item, index) in menuItems" @on-item="onAction"
             :key="index" :item='item' 
             :menuState='menuState' :index='index' :subMenuState='subMenuState' />
     </div>    
@@ -16,7 +16,8 @@ export default {
         return {
             subMenuState: {
                 selectedIndex: -1
-            }
+            },
+            subMenuItems: null
         }
     },
     components: {
@@ -27,6 +28,11 @@ export default {
         'menuState', 
         'keyDown'
     ],
+    computed: {
+        menuItems() {
+            return this.subMenuItems || this.items
+        }
+    },
     watch: {
         keyDown: function (newVal) {
             this.onKeyDown(newVal)            
@@ -37,22 +43,21 @@ export default {
             switch (evt.which) {
                 case 40: //  |d
                     this.subMenuState.selectedIndex++
-                    if (this.items.length == this.subMenuState.selectedIndex)
+                    if (this.menuItems.length == this.subMenuState.selectedIndex)
                         this.subMenuState.selectedIndex = 0
-                    if (this.items[this.subMenuState.selectedIndex].name == '-')
+                    if (this.menuItems[this.subMenuState.selectedIndex].name == '-')
                         this.subMenuState.selectedIndex++
                     break
                 case 38: //  |^
                     this.subMenuState.selectedIndex--
                     if (this.subMenuState.selectedIndex < 0)
-                        this.subMenuState.selectedIndex = this.items.length - 1
-                    if (this.items[this.subMenuState.selectedIndex].name == '-')
+                        this.subMenuState.selectedIndex = this.menuItems.length - 1
+                    if (this.menuItems[this.subMenuState.selectedIndex].name == '-')
                         this.subMenuState.selectedIndex--
                     break
                 case 13: // Enter
                 case 32: // Space
-                    this.items[this.subMenuState.selectedIndex].action()
-                    this.$emit('on-closing')
+                    this.onAction(this.menuItems[this.subMenuState.selectedIndex])
                     evt.preventDefault()
                     evt.stopPropagation()
                     break
@@ -69,10 +74,8 @@ export default {
                             }
                             this.shortcutHits = null
                         }
-
                         if (hits.length == 1) {
-                            this.items[hits[0]].action()
-                            this.$emit('on-closing')
+                            this.onAction(this.menuItems[hits[0]])
                             evt.preventDefault()
                             evt.stopPropagation()
                             return
@@ -84,6 +87,23 @@ export default {
                     }
                     break
             }
+        },
+        onAction(item) {
+            if (item.subMenu)
+                this.onSubmenu(item.subMenu)
+            else if (item.back) 
+                this.onSubmenu(null)
+            else {
+                item.action()
+                this.$emit('on-closing')
+            }
+        },
+        onSubmenu(subMenu) {
+            this.subMenuItems = []
+            setTimeout(() => {
+                this.subMenuItems = subMenu
+                this.subMenuState.selectedIndex = 0
+            })
         }
     },
     mounted: function () {

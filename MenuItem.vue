@@ -61,8 +61,12 @@ export default {
             if (this.subMenuState && !this.separator)
                 this.subMenuState.selectedIndex = this.index 
         },       
-        onClick: function () {
-            this.item.action()
+        onClick: function (evt) {
+            if (this.item.subMenu || this.item.back || this.item.action) {
+                this.$emit('on-item', this.item)
+                evt.preventDefault()
+                evt.stopPropagation()
+            }
         },
         getParts: function () {
             if (!this.parts) {

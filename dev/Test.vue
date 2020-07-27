@@ -1,6 +1,6 @@
 <template>
     <div class="root">
-        <main-menu :items="menuItems" :autoMode=true @="onMenuItem" />
+        <main-menu :items="menuItems" :autoMode=true />
         <h1>Ein Test</h1>
     </div>
 </template>
@@ -122,7 +122,7 @@ export default {
                     subItems: [{ 
                             name: "_Versteckte Dateien",
                             action: () => console.log("ShowHidden"),
-                            checkSelected: () => this.$store.state.showHidden,
+                            //checkSelected: () => this.$store.state.showHidden,
                             accelerator: { 
                                 name: "Strg+H",
                                 key: 72,
@@ -141,12 +141,32 @@ export default {
                         }, { 
                             name: "_Vorschau",
                             action: () => console.log("Show Viewer"),
-                            checkSelected: () => this.$store.state.showViewer,
+                            //checkSelected: () => this.$store.state.showViewer,
                             accelerator: { 
                                 name: "F3",
                                 key: 114,
                             }
                         }, { 
+                            name: "-"
+                        }, {
+                            name: "_Themen ->",
+                            subMenu: [{ 
+                                name: "<- _Zurück",
+                                back: true
+                            }, { 
+                                name: "-"
+                        }   , { 
+                                name: "_Blau",
+                                checkSelected: () => this.$store.state.showViewer
+                            }, {
+                                name: "_Rot",
+                                checkSelected: () => this.$store.state.showViewer,
+                            }, {
+                                name: "_Yaru",
+                                checkSelected: () => this.$store.state.showViewer,
+                            }
+                        ]},
+                        { 
                             name: "-"
                         }, { 
                             name: "_Zoomlevel"

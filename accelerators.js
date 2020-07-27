@@ -28,7 +28,6 @@ export function installAccelerators(items) {
         if (acceleratorMap.has(evt.keyCode)) {
             const v = acceleratorMap.get(evt.keyCode)
             if (v.find(n => isItem(evt, n.accelerator))) {
-                console.log("hat ihn", v[0].action)
                 v[0].action()
                 evt.preventDefault()
                 evt.stopPropagation()
