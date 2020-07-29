@@ -68,6 +68,8 @@ export default {
             if (this.autoMode && evt.keyCode == 18) {
                 this.visible = !this.visible
                 setTimeout(() => this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`))
+                evt.preventDefault()
+                evt.stopPropagation()
             }            
             if (this.menuState.isKeyboardActivated) {
                 const hits = parseShortcuts(this.shortcuts, evt.key)
