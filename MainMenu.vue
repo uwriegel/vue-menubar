@@ -58,7 +58,10 @@ export default {
             this.menuState.selectedIndex = -1
             if (this.menuState.lastActive)
                 this.menuState.lastActive.focus()
-            this.visible = !this.autoMode
+            if (this.visible) {
+                this.visible = !this.autoMode
+                setTimeout(() => this.$emit('resize'))
+            }        
         },
     },
     mounted: function () {
@@ -67,7 +70,10 @@ export default {
         document.addEventListener("keydown", evt => {
             if (this.autoMode && evt.keyCode == 18) {
                 this.visible = !this.visible
-                setTimeout(() => this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`))
+                setTimeout(() => {
+                    this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`)
+                    this.$emit('resize')
+                })
                 evt.preventDefault()
                 evt.stopPropagation()
             }            

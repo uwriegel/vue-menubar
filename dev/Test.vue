@@ -1,6 +1,6 @@
 <template>
     <div class="root">
-        <main-menu :items="menuItems" :autoMode=true />
+        <main-menu :items="menuItems" :autoMode=true @resize="menuResize" />
         <h1>Ein Test</h1>
     </div>
 </template>
@@ -13,7 +13,8 @@ export default {
     },
     methods: {
         rename() { console.log("Rename", this)},
-        extendedRename() { console.log("Extended Rename", this)}
+        extendedRename() { console.log("Extended Rename", this)},
+        menuResize() { console.log("Resize")}
     },
     data() {
         return {
