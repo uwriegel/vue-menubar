@@ -123,6 +123,6 @@ export default {
         border-style: solid;
         border-width: 1px;
         white-space: nowrap;
-        box-shadow: 3px 3px 3px var(--vue-menu-shadow-color);
+        box-shadow: 2px 2px 20px 2px var(--vue-menu-shadow-color);
     }
 </style>

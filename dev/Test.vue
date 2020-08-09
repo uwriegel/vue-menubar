@@ -206,7 +206,7 @@ export default {
         --vue-menu-hover-color: lightblue;
         --vue-menu-separator-color: #ddd;
         --vue-menu-border-color: lightgray;
-        --vue-menu-shadow-color: rgba(0, 0, 0, 0.21);
+        --vue-menu-shadow-color: rgba(0, 0, 0, 0.2);
         --vue-menu-selected-background-color: blue;
         --vue-menu-selected-color: white;
     }
