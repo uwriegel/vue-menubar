@@ -98,6 +98,8 @@ export default {
                     this.menuState.accelerated = true
                     this.menuState.lastActive = document.activeElement
                 } 
+                evt.preventDefault()
+                evt.stopPropagation()
             }
             else if (evt.which == 27) // ESC
                 this.closeMenu()
@@ -106,11 +108,13 @@ export default {
             if (evt.which == 18) { // Alt 
                 if (this.menuState.isKeyboardActivated && this.menuState.selectedIndex == -1) 
                     this.menuState.selectedIndex = 0
+                evt.preventDefault()
+                evt.stopPropagation()
             }
         }, true)
         this.shortcuts = getShortcuts(this.items)
         installAccelerators(this.items)
-        this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`)
+        setTimeout(() => this.$el.style.setProperty('--vue-menu-submenu-top', `${this.$el.children[0].clientHeight}px`))
     }
 }
 </script>
